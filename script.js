@@ -22,20 +22,29 @@ async function getWeatherData(location) {
     });
 
     const weatherData = await response.json()
-    console.log(weatherData)
     processData(weatherData)
 }
 
-function processData(weatherData){
-    
+function processData(weatherData) {
+    const datum = {
+        temperature: Math.round(weatherData.main.feels_like - 273),
+        weather: weatherData.weather[0].main,
+        description: weatherData.weather[0].description,
+        wind: Math.round(weatherData.wind.speed * 1.85 * 10) / 10,
+        sunrise: new Date(weatherData.sys.sunrise * 1000).toLocaleTimeString([], { hour12: true, hour: '2-digit', minute: '2-digit' }),
+        sunset: new Date(weatherData.sys.sunset * 1000).toLocaleTimeString([], { hour12: true, hour: '2-digit', minute: '2-digit' })
+    }
 
 
-    
+    console.log(weatherData)
+    console.log(weatherData.weather[0].main)
+    console.log(weatherData.weather[0].description)
+
     display()
 }
 
 function display() {
 
 
-    
+
 }
